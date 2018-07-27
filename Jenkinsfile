@@ -17,13 +17,23 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    sh 'mvn cobertura:cobertura'
                 }
             }
         }
-        stage('Deliver') { 
+        stage('INT') { 
             steps {
-                sh './jenkins/scripts/deliver.sh' 
+                sh 'echo int' 
+            }
+        }
+        stage('QA') { 
+            steps {
+                sh 'echo qa' 
+            }
+        }
+        stage('PROD') { 
+            steps {
+                sh 'echo prod' 
             }
         }
     }
