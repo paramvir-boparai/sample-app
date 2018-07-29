@@ -76,23 +76,23 @@
 				<artifactId>cobertura-maven-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<instrumentation>
-						<haltOnFailure>false</haltOnFailure>
-						<branchRate>75</branchRate>
-						<lineRate>85</lineRate>
-						<totalBranchRate>75</totalBranchRate>
-						<totalLineRate>85</totalLineRate>
-						<packageLineRate>75</packageLineRate>
-						<packageBranchRate>85</packageBranchRate>
-						<regexes>
-							<regex>
-								<pattern>com.gl.devops</pattern>
-								<branchRate>60</branchRate>
-								<lineRate>50</lineRate>
-							</regex>
-						</regexes>
-					</instrumentation>
+					<check>
+						<!-- Per-class thresholds -->
+						<lineRate>80</lineRate>
+						<branchRate>80</branchRate>
+						<!-- Project-wide thresholds -->
+						<totalLineRate>90</totalLineRate>
+						<totalBranchRate>90</totalBranchRate>
+					</check>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
