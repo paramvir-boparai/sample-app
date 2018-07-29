@@ -18,12 +18,8 @@ pipeline {
             post {
                 always {
                     sh 'mvn cobertura:cobertura'
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site/cobertura', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
                 }
-            }
-        }
-        stage('Coverage') {
-            steps {
-        cobertura autoUpdateHealth: false, autoUpdateStability: false, conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
             }
         }
         stage('INT') { 
