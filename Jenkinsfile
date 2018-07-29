@@ -18,6 +18,7 @@ pipeline {
             post {
                 always {
                     sh 'mvn sonar:sonar'
+                }
             }
         }
         stage('INT') { 
