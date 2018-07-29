@@ -70,6 +70,32 @@
 					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<instrumentation>
+						<check>
+							<haltOnFailure>false</haltOnFailure>
+							<branchRate>75</branchRate>
+							<lineRate>85</lineRate>
+							<totalBranchRate>75</totalBranchRate>
+							<totalLineRate>85</totalLineRate>
+							<packageLineRate>75</packageLineRate>
+							<packageBranchRate>85</packageBranchRate>
+							<regexes>
+								<regex>
+									<pattern>com.gl.devops</pattern>
+									<branchRate>60</branchRate>
+									<lineRate>50</lineRate>
+								</regex>
+							</regexes>
+						</check>
+					</instrumentation>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>
@@ -77,7 +103,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.6</version>
+				<version>2.7</version>
 				<configuration>
 					<formats>
 						<format>html</format>
