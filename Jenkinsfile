@@ -18,7 +18,7 @@ pipeline {
             post {
                 always {
                     sh 'mvn cobertura:cobertura'
-                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'site/cobertura', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site/cobertura', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
                 }
             }
         }
