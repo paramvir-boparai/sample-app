@@ -69,9 +69,6 @@
 				<version>2.22.0</version>
 				<configuration>
 					<useSystemClassLoader>false</useSystemClassLoader>
-					<systemPropertyVariables> 
-						<argLine>-Xmx2048m -Xms1024m</argLine> 
-					</systemPropertyVariables> 
 				</configuration>
 			</plugin>
 
