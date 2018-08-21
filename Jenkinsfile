@@ -8,15 +8,15 @@ pipeline {
     stages {
         stage('Package') {
             steps {
-                bat 'mvn clean package'
+                sh 'mvn clean package'
             }
         }
       stage('test') {
             steps {
                 parallel(test: {
-                    bat "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+                    sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
                 }, sonar: {
-                    bat "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
+                    sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
                 })
             }
             post {
@@ -28,7 +28,7 @@ pipeline {
         }
         stage('INT') { 
             steps {
-                bat 'echo int' 
+                sh 'echo int' 
             }
         }
         stage('QA') { 
@@ -36,27 +36,27 @@ pipeline {
                message "Are you sure and wanna proceed with QA Deployment?"
            }
             steps {
-                bat 'echo qa deploy' 
+                sh 'echo qa deploy' 
             }
         }
         stage('QA Regression') { 
             steps {
-                bat 'echo qa Regression' 
+                sh 'echo qa Regression' 
             }
         }
         stage('QA Security Testing') { 
             steps {
-                bat 'echo qa Security Testing' 
+                sh 'echo qa Security Testing' 
             }
         }
         stage('PROD') { 
             steps {
-                bat 'echo prod' 
+                sh 'echo prod' 
             }
         }
         stage('PROD Regression') { 
             steps {
-                bat 'echo prod Regression' 
+                sh 'echo prod Regression' 
             }
         }
     }
