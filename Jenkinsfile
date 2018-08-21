@@ -6,14 +6,14 @@ pipeline {
         }
     }
     stages {
-        stage('Build') {
+        stage('Package') {
             steps {
                 sh 'mvn clean package'
             }
         }
-      stage('install and sonar parallel') {
+      stage('test') {
             steps {
-                parallel(install: {
+                parallel(test: {
                     sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
                 }, sonar: {
                     sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
@@ -32,8 +32,11 @@ pipeline {
             }
         }
         stage('QA') { 
+            input {
+               message "Are you sure and wanna proceed with QA Deployment?"
+           }
             steps {
-                sh 'echo qa' 
+                sh 'echo qa deploy' 
             }
         }
         stage('QA Regression') { 
