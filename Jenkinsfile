@@ -8,15 +8,15 @@ pipeline {
     stages {
         stage('Package') {
             steps {
-                sh 'mvn clean package'
+                shell 'mvn clean package'
             }
         }
       stage('test') {
             steps {
                 parallel(test: {
-                    sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+                    shell "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
                 }, sonar: {
-                    sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
+                    shell "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
                 })
             }
             post {
