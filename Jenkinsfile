@@ -1,10 +1,4 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
     stages {
         stage('Package') {
             steps {
@@ -16,9 +10,14 @@ pipeline {
       stage('test') {
             steps {
                 parallel(test: {
-                    bat "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+                     withMaven(maven: 'Maven') {
+                        sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+                     }
                 }, sonar: {
-                    bat "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
+                    withMaven(maven: 'Maven') {
+                        sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"    
+                    }
+                    
                 })
             }
             post {
