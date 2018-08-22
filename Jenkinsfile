@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    node(){
+        git poll: true 
+    }
     
     stages {
         stage('Package') {
