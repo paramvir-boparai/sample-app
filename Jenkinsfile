@@ -31,7 +31,9 @@ pipeline {
         }
         stage('INT') { 
             steps {
-                shell 'echo int' 
+                withMaven(maven: 'Maven') {
+                    shell 'echo int' 
+                }
             }
         }
         stage('QA') { 
@@ -39,7 +41,9 @@ pipeline {
                message "Are you sure and wanna proceed with QA Deployment?"
            }
             steps {
-                shell 'echo qa deploy' 
+                withMaven(maven: 'Maven') {
+                    shell 'echo qa deploy' 
+                }
             }
         }
         stage('QA Regression') { 
@@ -49,17 +53,23 @@ pipeline {
         }
         stage('QA Security Testing') { 
             steps {
-                shell 'echo qa Security Testing' 
+                 withMaven(maven: 'Maven') {
+                    shell 'echo qa Security Testing' 
+                }
             }
         }
         stage('PROD') { 
             steps {
-                shell 'echo prod' 
+                withMaven(maven: 'Maven') {
+                    shell 'echo prod' 
+                }
             }
         }
         stage('PROD Regression') { 
             steps {
-                shell 'echo prod Regression' 
+                 withMaven(maven: 'Maven') {
+                    shell 'echo prod Regression' 
+                }
             }
         }
     }
