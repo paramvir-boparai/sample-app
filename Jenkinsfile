@@ -76,10 +76,10 @@ pipeline {
         }
 
         always {
-            step([$class: 'Mailer',
-                notifyEveryUnstableBuild: true,
-                recipients: "paramvir.boparai@globallogic.com",
-                sendToIndividuals: true])
+            emailext body: 'Build Success', 
+                recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+                                     [$class: 'RequesterRecipientProvider']], 
+                subject: 'Build Success', to: 'paramvir.boparai@globallogic.com'
         }
     }
 }
