@@ -1,9 +1,9 @@
 pipeline {
-    agent any
+    agent {
     node(){
         git credentialsId: '4afb391b-c0f9-4a16-bd14-774af3138070', url: 'https://github.com/paramvir-boparai/sample-app.git', poll: true 
     }
-    
+    }
     stages {
         stage('Package') {
             steps {
