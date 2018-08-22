@@ -13,7 +13,7 @@ pipeline {
             steps {
                 parallel(test: {
                      withMaven(maven: 'Maven') {
-                        bat "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+                        bat "mvn test"
                      }
                 }, sonar: {
                     withMaven(maven: 'Maven') {
