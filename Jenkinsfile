@@ -5,7 +5,7 @@ pipeline {
         stage('Package') {
             steps {
                withMaven(maven: 'Maven') {
-                    sh 'mvn clean package'
+                    bat 'mvn clean package'
                 }
             }
         }
@@ -13,11 +13,11 @@ pipeline {
             steps {
                 parallel(test: {
                      withMaven(maven: 'Maven') {
-                        shell "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+                        bat "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
                      }
                 }, sonar: {
                     withMaven(maven: 'Maven') {
-                        shell "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"    
+                        bat "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"    
                     }
                     
                 })
@@ -27,7 +27,7 @@ pipeline {
         stage('INT') { 
             steps {
                 withMaven(maven: 'Maven') {
-                    shell 'echo int' 
+                    bat 'echo int' 
                 }
             }
         }
