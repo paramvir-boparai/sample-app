@@ -37,33 +37,33 @@ pipeline {
            }
             steps {
                 withMaven(maven: 'Maven') {
-                    shell 'echo qa deploy' 
+                    bat 'echo qa deploy' 
                 }
             }
         }
         stage('QA Regression') { 
             steps {
-                shell 'echo qa Regression' 
+                bat 'echo qa Regression' 
             }
         }
         stage('QA Security Testing') { 
             steps {
                  withMaven(maven: 'Maven') {
-                    shell 'echo qa Security Testing' 
+                    bat 'echo qa Security Testing' 
                 }
             }
         }
         stage('PROD') { 
             steps {
                 withMaven(maven: 'Maven') {
-                    shell 'echo prod' 
+                    bat 'echo prod' 
                 }
             }
         }
         stage('PROD Regression') { 
             steps {
                  withMaven(maven: 'Maven') {
-                    shell 'echo prod Regression' 
+                    bat 'echo prod Regression' 
                 }
             }
         }
