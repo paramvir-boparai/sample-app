@@ -27,8 +27,6 @@
 		<jacoco.version>0.7.5.201505241946</jacoco.version>
 	</properties>
 
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
