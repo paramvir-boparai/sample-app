@@ -23,14 +23,14 @@ pipeline {
             }
            
         }
-        stage('INT') { 
+        stage('Deploy to INT env') { 
             steps {
                 withMaven(maven: 'Maven') {
                     bat 'echo int' 
                 }
             }
         }
-        stage('QA') { 
+        stage('Deploy to QA env') { 
             input {
                message "Are you sure and wanna proceed with QA Deployment?"
            }
@@ -40,26 +40,26 @@ pipeline {
                 }
             }
         }
-        stage('QA Regression') { 
+        stage('Run QA Regression suite') { 
             steps {
                 bat 'echo qa Regression' 
             }
         }
-        stage('QA Security Testing') { 
+        stage('Run QA Security Testing Suite') { 
             steps {
                  withMaven(maven: 'Maven') {
                     bat 'echo qa Security Testing' 
                 }
             }
         }
-        stage('PROD') { 
+        stage('Deploy to PROD env') { 
             steps {
                 withMaven(maven: 'Maven') {
                     bat 'echo prod' 
                 }
             }
         }
-        stage('PROD Regression') { 
+        stage('Run PROD Regression Suite') { 
             steps {
                  withMaven(maven: 'Maven') {
                     bat 'echo prod Regression' 
