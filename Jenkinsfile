@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Package') {
             steps {
-               withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {  
-                    shell 'mvn clean package'
+               withMaven(maven: 'Maven') {
+                    sh 'mvn clean package'
                 }
             }
         }
