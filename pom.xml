@@ -63,6 +63,17 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<skipMain>true</skipMain>
+					<skip>true</skip>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
 			 <plugin>
           			<groupId>org.apache.maven.plugins</groupId>
           			<artifactId>maven-surefire-plugin</artifactId>
@@ -72,54 +83,45 @@
     				</configuration>
         		</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<check>
-						<!-- Per-class thresholds -->
-						<lineRate>80</lineRate>
-						<branchRate>80</branchRate>
-						<!-- Project-wide thresholds -->
-						<totalLineRate>90</totalLineRate>
-						<totalBranchRate>90</totalBranchRate>
-					</check>
-				</configuration>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
 				<executions>
 					<execution>
-						<phase>verify</phase>
+						<id>prepare-agent</id>
 						<goals>
-							<goal>check</goal>
+							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<!-- Sets the path to the file which contains the execution data. -->
+
+							<dataFile>target/jacoco.exec</dataFile>
+							<!-- Sets the output directory for the code coverage report. -->
+							<outputDirectory>target/jacoco-ut</outputDirectory>
+						</configuration>
+					</execution>
 				</executions>
-				<dependencies>
-                			<dependency>
-                    				<groupId>org.ow2.asm</groupId>
-                    				<artifactId>asm</artifactId>
-                    				<version>5.0.3</version>
-                			</dependency>
-            			</dependencies>
+				<configuration>
+					<systemPropertyVariables>
+						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+					</systemPropertyVariables>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<formats>
-						<format>html</format>
-						<format>xml</format>
-					</formats>
-				</configuration>
-			</plugin>
-
-		</plugins>
-
-	</reporting>
-
-
+	
 </project>
