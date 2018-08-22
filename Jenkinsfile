@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Package') {
             steps {
-                withMaven(maven: 'Maven') {
+               withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {  
                     sh 'mvn clean package'
                 }
             }
