@@ -31,7 +31,7 @@ pipeline {
         }
         stage('INT') { 
             steps {
-                bat 'echo int' 
+                shell 'echo int' 
             }
         }
         stage('QA') { 
@@ -39,27 +39,27 @@ pipeline {
                message "Are you sure and wanna proceed with QA Deployment?"
            }
             steps {
-                bat 'echo qa deploy' 
+                shell 'echo qa deploy' 
             }
         }
         stage('QA Regression') { 
             steps {
-                bat 'echo qa Regression' 
+                shell 'echo qa Regression' 
             }
         }
         stage('QA Security Testing') { 
             steps {
-                bat 'echo qa Security Testing' 
+                shell 'echo qa Security Testing' 
             }
         }
         stage('PROD') { 
             steps {
-                bat 'echo prod' 
+                shell 'echo prod' 
             }
         }
         stage('PROD Regression') { 
             steps {
-                bat 'echo prod Regression' 
+                shell 'echo prod Regression' 
             }
         }
     }
