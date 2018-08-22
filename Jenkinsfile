@@ -16,7 +16,7 @@ pipeline {
                      }
                 }, sonar: {
                     withMaven(maven: 'Maven') {
-                        bat "mvn sonar:sonar -Dsonar.host.url=http://172.19.223.209:9000"    
+                        bat 'echo sonar skipped'  
                     }
                     
                 })
