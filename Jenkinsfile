@@ -5,7 +5,7 @@ pipeline {
         stage('Package') {
             steps {
                withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {  
-                    sh 'mvn clean package'
+                    shell 'mvn clean package'
                 }
             }
         }
@@ -13,11 +13,11 @@ pipeline {
             steps {
                 parallel(test: {
                      withMaven(maven: 'Maven') {
-                        sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+                        shell "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
                      }
                 }, sonar: {
                     withMaven(maven: 'Maven') {
-                        sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"    
+                        shell "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"    
                     }
                     
                 })
