@@ -17,7 +17,7 @@ pipeline {
                      }
                 }, sonar: {
                     withMaven(maven: 'Maven') {
-                        bat "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"    
+                        bat "mvn sonar:sonar -Dsonar.host.url=172.19.223.209"    
                     }
                     
                 })
